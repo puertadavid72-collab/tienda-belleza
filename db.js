@@ -7,8 +7,10 @@ const config = {
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     options: {
-        encrypt: false,
-        trustServerCertificate: true
+        // En producción (base de datos remota) usar DB_ENCRYPT=true y DB_TRUST_CERT=false.
+        // Sin estas variables se mantiene la configuración local de siempre.
+        encrypt: process.env.DB_ENCRYPT === 'true',
+        trustServerCertificate: process.env.DB_TRUST_CERT !== 'false'
     }
 };
 
